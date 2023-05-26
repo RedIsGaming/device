@@ -6,8 +6,13 @@ classDiagram
         - storage: int
         + addType(): string
         + addStorage(): int
-        + addProtection(): bool
-        + addSticker(): bool
+        + addProtection(): boolean
+        + addSticker(): boolean
+    }
+
+    class Origin {
+        <<Interface>>
+        + retrieveOrigin(): string
     }
 
     class Console {
@@ -19,28 +24,30 @@ classDiagram
     class Computer {
         + addType(): string
         + addStorage(): int
-        + addProtection(): bool
-        + addSticker(): bool
+        + addProtection(): boolean
+        + addSticker(): boolean
         + retrieveOrigin(): string
     }
 
     class SmartDevice {
         + addType(): string
         + addStorage(): int
-        + addProtection(): bool
+        + addProtection(): boolean
         + retrieveOrigin(): string
     }
 
-    class Origin {
+    class Subject {
         <<Interface>>
-        + retrieveOrigin(): string
+        + addSubscriber(person: Subscriber): Subscriber
+        + removeSubscriber(person: Subscriber): Subscriber
+        + notifySubscribers(): void
     }
 
     class Publisher {
         - subscribers: Subscriber[]
-        + addSubscriber(subscriber: Subscriber): Subscriber
-        + removeSubscriber(subscriber: Subscriber): Subscriber
-        + notifySubscribers(): bool
+        + addSubscriber(person: Subscriber): Subscriber
+        + removeSubscriber(person: Subscriber): Subscriber
+        + notifySubscribers(): void
     }
 
     class Subscriber {
@@ -59,8 +66,8 @@ classDiagram
     Device <|-- Console
     Device <|-- Computer
     Device <|-- SmartDevice
-    Publisher <|-- Subscriber
-    Device <|-- Publisher
+    Publisher --|> Subject
+    Publisher --|> Subscriber
     Subscriber <|-- App
     Subscriber <|-- Mail
     Origin <|-- Console
