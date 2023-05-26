@@ -4,10 +4,10 @@ classDiagram
         <<Abstract>>
         - type: string
         - storage: int
-        + addType(): string
-        + addStorage(): int
-        + addProtection(): boolean
-        + addSticker(): boolean
+        # pickType(): string
+        # findStorage(): int
+        + chooseProtection(): List~String~
+        + getSticker(): boolean
     }
 
     class Origin {
@@ -16,38 +16,59 @@ classDiagram
     }
 
     class Console {
-        + addType(): string
-        + addStorage(): int
+        # pickType(): string
+        # findStorage(): int
         + retrieveOrigin(): string
     }
 
     class Computer {
-        + addType(): string
-        + addStorage(): int
-        + addProtection(): boolean
-        + addSticker(): boolean
+        # pickType(): string
+        # findStorage(): int
         + retrieveOrigin(): string
+        + chooseProtection(): List~String~
+        + getSticker(): boolean
     }
 
     class SmartDevice {
-        + addType(): string
-        + addStorage(): int
-        + addProtection(): boolean
+        # pickType(): string
+        # findStorage(): int
         + retrieveOrigin(): string
+        + getSticker(): boolean
     }
 
-    class Subject {
+    class Color {
+        <<Enumeration>>
+        RED
+        BLUE
+        PURPLE
+        BLACK
+        WHITE
+    }
+
+    class ColorType {
+        - color: Color
+        + setColor(): Color
+    }
+
+    class Increase {
         <<Interface>>
-        + addSubscriber(person: Subscriber): Subscriber
-        + removeSubscriber(person: Subscriber): Subscriber
-        + notifySubscribers(): void
+        + addSubscriber(subscriber: Subscriber): Subscriber
+    }
+
+    class Decrease {
+        <<Interface>>
+        + removeSubscriber(subscriber: Subscriber): Subscriber
+    }
+
+    class Notify {
+        <<Interface>>
+        + notifySubscribers(message: string): string
     }
 
     class Publisher {
         - subscribers: Subscriber[]
-        + addSubscriber(person: Subscriber): Subscriber
-        + removeSubscriber(person: Subscriber): Subscriber
-        + notifySubscribers(): void
+        + addSubscriber(subscriber: Subscriber): Subscriber
+        + removeSubscriber(subscriber: Subscriber): Subscriber
     }
 
     class Subscriber {
@@ -56,21 +77,31 @@ classDiagram
     }
 
     class App {
+        + notifySubscribers(message: string): string
         + update(message: string): string
     }
 
     class Mail {
+        + notifySubscribers(message: string): string
         + update(message: string): string
     }
 
-    Device <|-- Console
-    Device <|-- Computer
-    Device <|-- SmartDevice
-    Publisher --|> Subject
-    Publisher --|> Subscriber
-    Subscriber <|-- App
-    Subscriber <|-- Mail
-    Origin <|-- Console
-    Origin <|-- Computer
-    Origin <|-- SmartDevice
+    Device <|-- Console : inheritance
+    Device <|-- Computer : inheritance
+    Device <|-- SmartDevice : inheritance
+    Origin <|-- Console : inheritance
+    Origin <|-- Computer : inheritance
+    Origin <|-- SmartDevice : inheritance
+    Console <.. ColorType : dependency
+    Computer <.. ColorType : dependency
+    SmartDevice <.. ColorType : dependency
+    Color o-- ColorType : aggregation
+    Increase <|-- Publisher : inheritance
+    Decrease <|-- Publisher : inheritance
+    Publisher --> Decrease : association
+    Publisher --> Subscriber : association
+    Notify <|-- App : inheritance
+    Notify <|-- Mail : inheritance
+    Subscriber <|-- App : inheritance
+    Subscriber <|-- Mail : inheritance
 ```
