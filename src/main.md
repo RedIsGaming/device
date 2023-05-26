@@ -4,10 +4,14 @@ classDiagram
         <<Abstract>>
         - type: string
         - storage: int
-        # pickType(): string
-        # findStorage(): int
-        + chooseProtection(): List~String~
-        + getSticker(): boolean
+        %% Template Method with required methods
+        # deviceOption(): void
+        - pickType(): string
+        - findStorage(): int
+
+        %% Optional methods
+        # chooseProtection(): List~String~
+        # getSticker(): boolean
     }
 
     class Origin {
@@ -16,24 +20,21 @@ classDiagram
     }
 
     class Console {
-        # pickType(): string
-        # findStorage(): int
+        # deviceOption(): void
         + retrieveOrigin(): string
     }
 
     class Computer {
-        # pickType(): string
-        # findStorage(): int
+        # deviceOption(): void
         + retrieveOrigin(): string
-        + chooseProtection(): List~String~
-        + getSticker(): boolean
+        # chooseProtection(): List~String~
+        # getSticker(): boolean
     }
 
     class SmartDevice {
-        # pickType(): string
-        # findStorage(): int
+        # deviceOption(): void
         + retrieveOrigin(): string
-        + getSticker(): boolean
+        # getSticker(): boolean
     }
 
     class Color {
@@ -43,6 +44,8 @@ classDiagram
         PURPLE
         BLACK
         WHITE
+        GREEN
+        GRAY
     }
 
     class ColorType {
@@ -86,22 +89,22 @@ classDiagram
         + update(message: string): string
     }
 
-    Device <|-- Console : inheritance
-    Device <|-- Computer : inheritance
-    Device <|-- SmartDevice : inheritance
-    Origin <|-- Console : inheritance
-    Origin <|-- Computer : inheritance
-    Origin <|-- SmartDevice : inheritance
-    Console <.. ColorType : dependency
-    Computer <.. ColorType : dependency
-    SmartDevice <.. ColorType : dependency
+    Device <|-- Console : inheritant from
+    Device <|-- Computer : inheritant from
+    Device <|-- SmartDevice : inheritant from
+    Origin <|-- Console : inheritant from
+    Origin <|-- Computer : inheritant from
+    Origin <|-- SmartDevice : inheritant from
+    Console ..> ColorType : depend on
+    Computer ..> ColorType : depend on
+    SmartDevice ..> ColorType : depend on
     Color o-- ColorType : aggregation
-    Increase <|-- Publisher : inheritance
-    Decrease <|-- Publisher : inheritance
-    Publisher --> Decrease : association
-    Publisher --> Subscriber : association
-    Notify <|-- App : inheritance
-    Notify <|-- Mail : inheritance
-    Subscriber <|-- App : inheritance
-    Subscriber <|-- Mail : inheritance
+    Increase <|-- Publisher : inheritant from
+    Decrease <|-- Publisher : inheritant from
+    Publisher --> Device : is associated with
+    Publisher --> Subscriber : is associated with
+    Notify <|-- App : inheritant from
+    Notify <|-- Mail : inheritant from
+    Subscriber <|-- App : inheritant from
+    Subscriber <|-- Mail : inheritant from
 ```
