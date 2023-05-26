@@ -4,12 +4,9 @@ classDiagram
         <<Abstract>>
         - type: string
         - storage: int
-        %% Template Method with required methods
         # deviceOption(): void
         - pickType(): string
         - findStorage(): int
-
-        %% Optional methods
         # chooseProtection(): List~String~
         # getSticker(): boolean
     }
@@ -72,6 +69,7 @@ classDiagram
         - subscribers: Subscriber[]
         + addSubscriber(subscriber: Subscriber): Subscriber
         + removeSubscriber(subscriber: Subscriber): Subscriber
+        + notifySubscribers(message: string): string
     }
 
     class Subscriber {
@@ -80,12 +78,10 @@ classDiagram
     }
 
     class App {
-        + notifySubscribers(message: string): string
         + update(message: string): string
     }
 
     class Mail {
-        + notifySubscribers(message: string): string
         + update(message: string): string
     }
 
@@ -95,16 +91,15 @@ classDiagram
     Origin <|-- Console : inheritant from
     Origin <|-- Computer : inheritant from
     Origin <|-- SmartDevice : inheritant from
-    Console ..> ColorType : depend on
-    Computer ..> ColorType : depend on
-    SmartDevice ..> ColorType : depend on
-    Color o-- ColorType : aggregation
+    Console <.. ColorType : depend on
+    Computer <.. ColorType : depend on
+    SmartDevice <.. ColorType : depend on
+    ColorType --o Color : aggregation
     Increase <|-- Publisher : inheritant from
     Decrease <|-- Publisher : inheritant from
+    Notify <|-- Publisher : inheritant from
     Publisher --> Device : is associated with
     Publisher --> Subscriber : is associated with
-    Notify <|-- App : inheritant from
-    Notify <|-- Mail : inheritant from
     Subscriber <|-- App : inheritant from
     Subscriber <|-- Mail : inheritant from
 ```
