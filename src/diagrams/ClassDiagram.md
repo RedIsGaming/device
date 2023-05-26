@@ -7,30 +7,23 @@ classDiagram
         # deviceOption(): void
         - pickType(): string
         - findStorage(): int
+        - retrieveOrigin(): string
         # chooseProtection(): List~String~
         # getSticker(): boolean
     }
 
-    class Origin {
-        <<Interface>>
-        + retrieveOrigin(): string
-    }
-
     class Console {
         # deviceOption(): void
-        + retrieveOrigin(): string
     }
 
     class Computer {
         # deviceOption(): void
-        + retrieveOrigin(): string
         # chooseProtection(): List~String~
         # getSticker(): boolean
     }
 
     class SmartDevice {
         # deviceOption(): void
-        + retrieveOrigin(): string
         # getSticker(): boolean
     }
 
@@ -41,8 +34,6 @@ classDiagram
         PURPLE
         BLACK
         WHITE
-        GREEN
-        GRAY
     }
 
     class ColorType {
@@ -88,9 +79,6 @@ classDiagram
     Device <|-- Console : inheritant from
     Device <|-- Computer : inheritant from
     Device <|-- SmartDevice : inheritant from
-    Origin <|-- Console : inheritant from
-    Origin <|-- Computer : inheritant from
-    Origin <|-- SmartDevice : inheritant from
     Console <.. ColorType : depend on
     Computer <.. ColorType : depend on
     SmartDevice <.. ColorType : depend on
