@@ -2,28 +2,32 @@
 classDiagram
     class Device {
         <<Abstract>>
-        - type: string
-        - storage: int
-        # deviceOption(): void
-        - pickType(): string
-        - findStorage(): int
-        - retrieveOrigin(): string
-        # chooseProtection(): List~String~
+        - deviceOption(): void
+        # pickType(): string
+        # findStorage(): int
+        # retrieveOrigin(): string
+        # chooseProtection(): Vector~String~
         # getSticker(): boolean
     }
 
     class Console {
-        # deviceOption(): void
+        # pickType(): string
+        # findStorage(): int
+        # retrieveOrigin(): string
     }
 
     class Computer {
-        # deviceOption(): void
-        # chooseProtection(): List~String~
+        # pickType(): string
+        # findStorage(): int
+        # retrieveOrigin(): string
+        # chooseProtection(): Vector~String~
         # getSticker(): boolean
     }
 
     class SmartDevice {
-        # deviceOption(): void
+        # pickType(): string
+        # findStorage(): int
+        # retrieveOrigin(): string
         # getSticker(): boolean
     }
 
@@ -37,33 +41,39 @@ classDiagram
     }
 
     class ColorType {
-        - color: Color
-        + setColor(): Color
+        - colors: Vector~Color~
+        + ColorType(colors: Vector~Color~)
+        + colortype(): Color
     }
 
     class Increase {
+        <<use>>
         <<Interface>>
         + addSubscriber(subscriber: Subscriber): Subscriber
     }
 
     class Decrease {
+        <<use>>
         <<Interface>>
         + removeSubscriber(subscriber: Subscriber): Subscriber
     }
 
     class Notify {
+        <<use>>
         <<Interface>>
         + notifySubscribers(message: string): string
     }
 
     class Publisher {
-        - subscribers: Subscriber[]
+        - subscribers: Vector~Subscriber~
+        + publisher(): Subscriber
         + addSubscriber(subscriber: Subscriber): Subscriber
         + removeSubscriber(subscriber: Subscriber): Subscriber
         + notifySubscribers(message: string): string
     }
 
     class Subscriber {
+        <<use>>
         <<Interface>>
         + update(message: string): string
     }
@@ -80,8 +90,8 @@ classDiagram
     Device <|-- Computer : inheritant from
     Device <|-- SmartDevice : inheritant from
     Console <.. ColorType : depend on
-    Computer <.. ColorType : depend on
-    SmartDevice <.. ColorType : depend on
+    %%Computer <.. ColorType : depend on
+    %%SmartDevice <.. ColorType : depend on
     ColorType --o Color : aggregation
     Increase <|-- Publisher : inheritant from
     Decrease <|-- Publisher : inheritant from
