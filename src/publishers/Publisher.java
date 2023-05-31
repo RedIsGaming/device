@@ -3,30 +3,40 @@ package src.publishers;
 import java.util.Vector;
 import src.subscribers.Subscriber;
 
-public record Publisher(Vector<Subscriber> subscribers) implements Increase, Decrease, Notify {
-    public Subscriber publisher(Vector<Subscriber> subscribers) {
+public record Publisher<T, R>(Vector<String> subscribers) implements Increase<T, R>, Decrease<T, R>, Notify<T, R> {
+    public String publisher() {
         return subscribers
             .iterator()
             .next();
     }
 
     @Override
-    public Publisher addSubscriber(Subscriber subscriber) {
-        Vector<Subscriber> newSubscribers = new Vector<>(subscribers);
-        newSubscribers.add(subscriber);
-        return new Publisher(newSubscribers);
+    public R addSubscriber(T subscriber) {
+        Subscriber newSubs = (String newSub) -> {
+            subscribers.add(newSub);
+            return publisher();
+        };
+
+        newSubs.update(subscriber.toString());
+        return (R) newSubs;
     }
 
     @Override
-    public Publisher removeSubscriber(Subscriber subscriber) {
-        Vector<Subscriber> leavedSubscribers = new Vector<>(subscribers);
-        leavedSubscribers.remove(subscriber);
-        return new Publisher(leavedSubscribers);
+    public R removeSubscriber(T subscriber) {
+        Subscriber leavedSubs = (String leavedSub) -> {
+            subscribers.remove(leavedSub);
+            return publisher();
+        };
+
+        leavedSubs.update(subscriber.toString());
+        return (R) leavedSubs;
     }
 
     @Override
-    public String notifySubscribers(String message) {
-        var newMessage = message.startsWith("Hello");
-        return String.valueOf(newMessage);
+    public R notifySubscribers(T message) {
+        Vector<String> notifiedSubs = new Vector<>(message.toString().length());
+
+        notifiedSubs.iterator().next();
+        return (R) notifySubs;
     }
 }

@@ -1,6 +1,6 @@
 package src.publishers;
 
 @FunctionalInterface
-public interface Notify {
-    String notifySubscribers(String message);
+public interface Notify<T, R> {
+    R notifySubscribers(T message);
 }

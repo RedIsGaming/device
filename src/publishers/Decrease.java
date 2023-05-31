@@ -1,8 +1,6 @@
 package src.publishers;
 
-import src.subscribers.Subscriber;
-
 @FunctionalInterface
-public interface Decrease {
-    Publisher removeSubscriber(Subscriber subscriber);
+public interface Decrease<T, R> {
+    R removeSubscriber(T subscriber);
 }

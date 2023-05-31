@@ -65,7 +65,7 @@ classDiagram
     }
 
     class Publisher {
-        - subscribers: Vector~Subscriber~
+        - subscribers: Vector~String~
         + publisher(): Subscriber
         + addSubscriber(subscriber: Subscriber): Subscriber
         + removeSubscriber(subscriber: Subscriber): Subscriber
@@ -73,7 +73,6 @@ classDiagram
     }
 
     class Subscriber {
-        <<use>>
         <<Interface>>
         + update(message: string): string
     }
@@ -89,9 +88,7 @@ classDiagram
     Device <|-- Console : inheritant from
     Device <|-- Computer : inheritant from
     Device <|-- SmartDevice : inheritant from
-    Console <.. ColorType : depend on
-    %%Computer <.. ColorType : depend on
-    %%SmartDevice <.. ColorType : depend on
+    Computer <.. ColorType : depend on
     ColorType --o Color : aggregation
     Increase <|-- Publisher : inheritant from
     Decrease <|-- Publisher : inheritant from
