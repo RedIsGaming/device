@@ -3,7 +3,7 @@ package src.devices;
 import java.util.Vector;
 
 public abstract class Device {
-    private void deviceOption() {
+    public void deviceOption() {
         pickType();
         findStorage();
         retrieveOrigin();

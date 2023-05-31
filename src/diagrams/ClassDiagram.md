@@ -2,7 +2,7 @@
 classDiagram
     class Device {
         <<Abstract>>
-        - deviceOption(): void
+        + deviceOption(): void
         # pickType(): string
         # findStorage(): int
         # retrieveOrigin(): string
@@ -47,29 +47,26 @@ classDiagram
     }
 
     class Increase {
-        <<use>>
         <<Interface>>
-        + addSubscriber(subscriber: Subscriber): Subscriber
+        + addSubscriber(subscriber: T): R
     }
 
     class Decrease {
-        <<use>>
         <<Interface>>
-        + removeSubscriber(subscriber: Subscriber): Subscriber
+        + removeSubscriber(subscriber: T): R
     }
 
     class Notify {
-        <<use>>
         <<Interface>>
-        + notifySubscribers(message: string): string
+        + notifySubscribers(message: T): R
     }
 
     class Publisher {
         - subscribers: Vector~String~
-        + publisher(): Subscriber
-        + addSubscriber(subscriber: Subscriber): Subscriber
-        + removeSubscriber(subscriber: Subscriber): Subscriber
-        + notifySubscribers(message: string): string
+        + publisher(): string
+        + addSubscriber(subscriber: T): R
+        + removeSubscriber(subscriber: T): R
+        + notifySubscribers(message: T): R
     }
 
     class Subscriber {
