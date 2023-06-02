@@ -9,8 +9,8 @@ public class Computer extends Device {
     }
 
     @Override
-    protected int findStorage() {
-        return 0;
+    protected Vector<Integer> findStorage() {
+        return new Vector<>();
     }
 
     @Override

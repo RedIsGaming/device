@@ -1,8 +1,8 @@
 package src.subscribers;
 
-public record Mail() implements Subscriber {
+public record Mail<T>() implements Subscriber<T> {
     @Override
-    public String update(String message) {
+    public T update(T message) {
         return message;
     }
 }

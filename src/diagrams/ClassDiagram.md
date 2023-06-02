@@ -3,31 +3,31 @@ classDiagram
     class Device {
         <<Abstract>>
         + deviceOption(): void
-        # pickType(): string
-        # findStorage(): int
-        # retrieveOrigin(): string
+        # pickType(): String
+        # findStorage(): Vector~Integer~
+        # retrieveOrigin(): String
         # chooseProtection(): Vector~String~
         # getSticker(): boolean
     }
 
     class Console {
-        # pickType(): string
-        # findStorage(): int
-        # retrieveOrigin(): string
+        # pickType(): String
+        # findStorage(): Vector~Integer~
+        # retrieveOrigin(): String
     }
 
     class Computer {
-        # pickType(): string
-        # findStorage(): int
-        # retrieveOrigin(): string
+        # pickType(): String
+        # findStorage(): Vector~Integer~
+        # retrieveOrigin(): String
         # chooseProtection(): Vector~String~
         # getSticker(): boolean
     }
 
     class SmartDevice {
-        # pickType(): string
-        # findStorage(): int
-        # retrieveOrigin(): string
+        # pickType(): String
+        # findStorage(): Vector~Integer~
+        # retrieveOrigin(): String
         # getSticker(): boolean
     }
 
@@ -43,43 +43,45 @@ classDiagram
     class ColorType {
         - colors: Vector~Color~
         + ColorType(colors: Vector~Color~)
-        + colortype(): Color
+        + colorType(): boolean
     }
 
-    class Increase {
+    class Increase~T~ {
         <<Interface>>
-        + addSubscriber(subscriber: T): R
+        + addSubscriber(subscriber: T): T
     }
 
-    class Decrease {
+    class Decrease~T~ {
         <<Interface>>
-        + removeSubscriber(subscriber: T): R
+        + removeSubscriber(subscriber: T): T
     }
 
-    class Notify {
+    class Notify~T~ {
         <<Interface>>
-        + notifySubscribers(message: T): R
+        + notifySubscribers(): T
     }
 
-    class Publisher {
-        - subscribers: Vector~String~
-        + publisher(): string
-        + addSubscriber(subscriber: T): R
-        + removeSubscriber(subscriber: T): R
-        + notifySubscribers(message: T): R
+    class Publisher~T~ {
+        - subscribers: Vector~T~
+        - messages: T
+        + Publisher(subscribers: Vector~T~)
+        - iterSubscriber(): T
+        + addSubscriber(subscriber: T): T
+        + removeSubscriber(subscriber: T): T
+        + notifySubscribers(): T
     }
 
-    class Subscriber {
+    class Subscriber~T~ {
         <<Interface>>
-        + update(message: string): string
+        + update(message: T): T
     }
 
-    class App {
-        + update(message: string): string
+    class App~T~ {
+        + update(message: T): T
     }
 
-    class Mail {
-        + update(message: string): string
+    class Mail~T~ {
+        + update(message: T): T
     }
 
     Device <|-- Console : inheritant from

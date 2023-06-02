@@ -1,5 +1,6 @@
 package src.subscribers;
 
-public interface Subscriber {
-    String update(String message);
+@FunctionalInterface
+public interface Subscriber<T> {
+    T update(T message);
 }

@@ -10,7 +10,7 @@ public abstract class Device {
     }
 
     abstract protected String pickType();
-    abstract protected int findStorage();
+    abstract protected Vector<Integer> findStorage();
     abstract protected String retrieveOrigin();
 
     protected Vector<String> chooseProtection() {
