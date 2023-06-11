@@ -1,23 +1,19 @@
 package src.devices;
 
-import java.util.Vector;
-
 public abstract class Device {
-    public void deviceOption() {
-        pickType();
-        findStorage();
-        retrieveOrigin();
+    protected void deviceOption(String type, int storage) {
+        pickType(type);
+        findStorage(storage);
     }
 
-    abstract protected String pickType();
-    abstract protected Vector<Integer> findStorage();
-    abstract protected String retrieveOrigin();
+    abstract protected String pickType(String type);
+    abstract protected int findStorage(int storage);
 
-    protected Vector<String> chooseProtection() {
-        return new Vector<>();
+    protected String chooseProtection(String chooseProtection) {
+        return null;
     }
 
-    protected boolean getSticker() {
-        return true;
+    protected boolean getSticker(boolean getSticker) {
+        return false;
     }
 }

@@ -2,33 +2,50 @@
 classDiagram
     class Device {
         <<Abstract>>
-        + deviceOption(): void
-        # pickType(): String
-        # findStorage(): Vector~Integer~
-        # retrieveOrigin(): String
-        # chooseProtection(): Vector~String~
-        # getSticker(): boolean
+        # deviceOption(type: String, storage: int): void
+        # pickType(type: String): String
+        # findStorage(storage: int): int
+        # chooseProtection(chooseProtection: String): String
+        # getSticker(getSticker: boolean): boolean
     }
 
     class Console {
-        # pickType(): String
-        # findStorage(): Vector~Integer~
-        # retrieveOrigin(): String
+        # pickType(type: String): String
+        # findStorage(storage: int): int
     }
 
     class Computer {
-        # pickType(): String
-        # findStorage(): Vector~Integer~
-        # retrieveOrigin(): String
-        # chooseProtection(): Vector~String~
-        # getSticker(): boolean
+        # pickType(type: String): String
+        # findStorage(storage: int): int
+        # chooseProtection(chooseProtection: String): String
+        # getSticker(getSticker: boolean): boolean
     }
 
     class SmartDevice {
-        # pickType(): String
-        # findStorage(): Vector~Integer~
-        # retrieveOrigin(): String
-        # getSticker(): boolean
+        # pickType(type: String): String
+        # findStorage(storage: int): int
+        # getSticker(getSticker: boolean): boolean
+    }
+
+    class Option {
+        - printDevice: PrintDevice
+        - deviceCounter: DeviceCounter
+        + putColor(): ColorType
+        + consoleOption(): void
+        + computerOption(): void
+        + smartDeviceOption(): void
+        + deviceOptions(): void
+    }
+
+    class PrintDevice {
+        # printConsole(counter: int, type: String, storage: int): void
+        # printComputer(counter: int, type: String, storage: int, protection: String, sticker: boolean): void
+        # printSmartDevice(counter: int, type: String, storage: int, sticker: boolean): void
+    }
+
+    class DeviceCounter {
+        - counter: int
+        # counter(): int
     }
 
     class Color {
@@ -43,7 +60,7 @@ classDiagram
     class ColorType {
         - colors: Vector~Color~
         + ColorType(colors: Vector~Color~)
-        + colorType(): boolean
+        + colorType(): Vector~Color~
     }
 
     class Increase~T~ {
@@ -65,7 +82,6 @@ classDiagram
         - subscribers: Vector~T~
         - messages: T
         + Publisher(subscribers: Vector~T~)
-        - iterSubscriber(): T
         + addSubscriber(subscriber: T): T
         + removeSubscriber(subscriber: T): T
         + notifySubscribers(): T
@@ -87,6 +103,8 @@ classDiagram
     Device <|-- Console : inheritant from
     Device <|-- Computer : inheritant from
     Device <|-- SmartDevice : inheritant from
+    Option <-- PrintDevice : is associated with
+    Option <-- DeviceCounter : is associated with
     Computer <.. ColorType : depend on
     ColorType --o Color : aggregation
     Increase <|-- Publisher : inheritant from

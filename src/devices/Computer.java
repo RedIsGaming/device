@@ -1,30 +1,23 @@
 package src.devices;
 
-import java.util.Vector;
-
 public class Computer extends Device {
     @Override
-    protected String pickType() {
-        return null;
+    protected String pickType(String type) {
+        return type;
     }
 
     @Override
-    protected Vector<Integer> findStorage() {
-        return new Vector<>();
+    protected int findStorage(int storage) {
+        return storage;
     }
 
     @Override
-    protected String retrieveOrigin() {
-        return null;
+    protected String chooseProtection(String chooseProtection) {
+        return chooseProtection;
     }
 
     @Override
-    protected Vector<String> chooseProtection() {
-        return super.chooseProtection();
-    }
-
-    @Override
-    protected boolean getSticker() {
-        return super.getSticker();
+    protected boolean getSticker(boolean getSticker) {
+        return getSticker;
     }
 }

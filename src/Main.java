@@ -1,39 +1,35 @@
 package src;
 
-import src.colors.*;
-import src.publishers.*;
+import src.devices.*;
+import src.publishers.Publisher;
 import java.util.Vector;
-import java.util.stream.IntStream;
-import src.devices.Device;
+import src.subscribers.*;
 
 public class Main {
     public static void main(String[] args) {
-        Publisher<String> publisher = new Publisher<>(new Vector<>(), "Hi");
-        Vector<Color> colors = new Vector<>();
+        Option.deviceOptions();
 
-        Vector<String> subscribers = IntStream
-            .range(0, 1000)
-            .filter(i -> i % 100 == 0)
-            .mapToObj(s -> "RedIsGaming" + s)
-            .collect(Vector::new, Vector::add, Vector::addAll);
-
-        System.out.println(subscribers);
-
+        Publisher<String> publisher = new Publisher<>(new Vector<>(), "A new device has been announced!");
         publisher.addSubscriber("RedIsGaming");
-        publisher.addSubscriber("RedIsGaming2");
-        publisher.addSubscriber("RedIsGaming");
-        publisher.addSubscriber("RedIsGaming3");
-        publisher.removeSubscriber("RedIsGaming");
-        publisher.removeSubscriber("RedIsGaming");
-        
-        System.out.println(publisher.subscribers());
-        colors.add(Color.BLACK);
-        System.out.println();
-        System.out.println(colors.contains(Color.BLACK));
+        publisher.addSubscriber("Akinator");
+        publisher.addSubscriber("God");
+        System.out.printf("\u001B[31mSubscribers: %s\n", publisher.subscribers());
 
-        Device device = new Computer();
-        device.pickType();
-        device.findStorage();
-        device.retrieveOrigin();
+        Subscriber<String> appSubscribers = new App<>();
+        Subscriber<String> mailSubscribers = new Mail<>();
+
+        System.out.println(publisher.notifySubscribers());
+        System.out.println(appSubscribers.update("Check out this cool new devices: "));
+        System.out.println(mailSubscribers.update("Check out this cool new devices: \n"));
+        Option.consoleOption();
+
+        publisher.removeSubscriber("God");
+        publisher.removeSubscriber("Akinator");
+        System.out.printf("\u001B[31mSubscribers: %s\n", publisher.subscribers());
+
+        System.out.println(publisher.notifySubscribers());
+        System.out.println(appSubscribers.update("This special device is only available for a limited time!"));
+        System.out.println(mailSubscribers.update("This special device is only available for a limited time!"));
+        Option.smartDeviceOption();
     }
 }

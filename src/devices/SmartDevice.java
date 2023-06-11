@@ -2,23 +2,17 @@ package src.devices;
 
 public class SmartDevice extends Device {
     @Override
-    protected String pickType() {
-        return null;
+    protected String pickType(String type) {
+        return type;
     }
 
     @Override
-    protected Vector<Integer> findStorage() {
-        return new Vector<>();
+    protected int findStorage(int storage) {
+        return storage;
     }
 
     @Override
-    protected String retrieveOrigin() {
-        return null;
-    }
-
-
-    @Override
-    protected boolean getSticker() {
-        return super.getSticker();
+    protected boolean getSticker(boolean getSticker) {
+        return getSticker;
     }
 }

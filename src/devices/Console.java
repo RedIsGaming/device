@@ -2,17 +2,12 @@ package src.devices;
 
 public class Console extends Device {
     @Override
-    protected String pickType() {
-        return null;
+    protected String pickType(String type) {
+        return type;
     }
 
     @Override
-    protected Vector<Integer> findStorage() {
-        return new Vector<>();
-    }
-
-    @Override
-    protected String retrieveOrigin() {
-        return null;
+    protected int findStorage(int storage) {
+        return storage;
     }
 }

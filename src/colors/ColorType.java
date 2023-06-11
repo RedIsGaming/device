@@ -10,9 +10,7 @@ public class ColorType extends Computer {
         this.colors = colors;
     }
 
-    public boolean colorType() {
-        return this.colors
-            .stream()
-            .anyMatch(c -> c.equals(Color.BLACK));
+    public Vector<Color> colorType() {
+        return this.colors;
     }
 }

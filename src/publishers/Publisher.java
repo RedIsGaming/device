@@ -7,24 +7,16 @@ public record Publisher<T>(Vector<T> subscribers, T messages) implements Increas
         this(subscribers, null);
     }
 
-    private T iterSubscriber() {
-        return subscribers
-            .stream()
-            .filter(s -> s.equals("RedIsGaming"))
-            .findFirst()
-            .orElse(null);
-    }
-
     @Override
     public T addSubscriber(T subscriber) {
-        subscribers.add(subscriber);
-        return iterSubscriber();
+        boolean add = subscribers.add(subscriber);
+        return add ? subscriber : null;
     }
 
     @Override
     public T removeSubscriber(T subscriber) {
-        subscribers.remove(subscriber);
-        return iterSubscriber();
+        boolean remove = subscribers.remove(subscriber);
+        return remove ? subscriber : null;
     }
 
     @Override
