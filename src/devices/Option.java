@@ -6,7 +6,7 @@ import src.colors.Color;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Option {
+public record Option() {
     private static final PrintDevice printDevice = new PrintDevice();
     private static final DeviceCounter deviceCounter = new DeviceCounter();
 
